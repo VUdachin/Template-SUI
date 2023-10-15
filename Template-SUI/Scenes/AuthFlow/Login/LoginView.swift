@@ -114,9 +114,10 @@ struct LoginView: View {
             NavigationLink(destination: {
                 RegistrationView(viewModel: RegistrationViewModel(email: viewModel.email))
             }, label: {
-                Text("Sign in")
+                Text("Sign In")
             })
         }
+        .padding()
     }
 }
 

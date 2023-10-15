@@ -80,8 +80,6 @@ struct RegistrationView: View {
                 case .emailPassword: break
                 }
             }
-
-            _authSelectionView
         }
     }
 
@@ -96,16 +94,6 @@ struct RegistrationView: View {
             )
             .padding(.vertical, 32)
             .padding(.horizontal, 16)
-    }
-
-    private var _authSelectionView: some View {
-        HStack {
-            Text("I have account!")
-                .foregroundColor(Color.gray)
-            Button("Sign In") {
-                // to login
-            }
-        }
     }
 }
 

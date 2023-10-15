@@ -21,6 +21,7 @@
 		B1ED2F9A2ADC354F00F3967A /* AuthCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1ED2F992ADC354F00F3967A /* AuthCredentials.swift */; };
 		B1ED2F9D2ADC383800F3967A /* AuthServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1ED2F9C2ADC383800F3967A /* AuthServiceType.swift */; };
 		B1ED2FA02ADC3A5100F3967A /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1ED2F9F2ADC3A5100F3967A /* UserRepository.swift */; };
+		B1ED2FA22ADC631900F3967A /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B1ED2FA12ADC631900F3967A /* Localizable.xcstrings */; };
 		B1FA327C2AD20FC800AA5896 /* Template_SUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FA327B2AD20FC800AA5896 /* Template_SUIApp.swift */; };
 		B1FA327E2AD20FC800AA5896 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FA327D2AD20FC800AA5896 /* ContentView.swift */; };
 		B1FA32802AD20FC800AA5896 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FA327F2AD20FC800AA5896 /* Item.swift */; };
@@ -53,6 +54,7 @@
 		B1ED2F992ADC354F00F3967A /* AuthCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCredentials.swift; sourceTree = "<group>"; };
 		B1ED2F9C2ADC383800F3967A /* AuthServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServiceType.swift; sourceTree = "<group>"; };
 		B1ED2F9F2ADC3A5100F3967A /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		B1ED2FA12ADC631900F3967A /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		B1FA32782AD20FC800AA5896 /* Template-SUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Template-SUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1FA327B2AD20FC800AA5896 /* Template_SUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Template_SUIApp.swift; sourceTree = "<group>"; };
 		B1FA327D2AD20FC800AA5896 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				B1FA32812AD20FC800AA5896 /* Assets.xcassets */,
+				B1ED2FA12ADC631900F3967A /* Localizable.xcstrings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = B1FA326F2AD20FC800AA5896;
 			packageReferences = (
@@ -343,6 +347,7 @@
 			files = (
 				B1FA32852AD20FC800AA5896 /* Preview Assets.xcassets in Resources */,
 				B1FA32822AD20FC800AA5896 /* Assets.xcassets in Resources */,
+				B1ED2FA22ADC631900F3967A /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

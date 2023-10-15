@@ -13,7 +13,7 @@ struct AuthServicesView: View {
     var action: (AuthServiceType) -> Void
 
     var body: some View {
-        HStack(alignment: .center, spacing: 8) {
+        HStack(alignment: .center, spacing: 16) {
             GoogleSignInButton(style: .icon) {
                 action(.google)
             }
@@ -22,10 +22,13 @@ struct AuthServicesView: View {
             Button {
                 action(.apple)
             } label: {
-                Text("Apple Sign In")
+                Image(systemName: "apple.logo")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .foregroundStyle(.black)
             }
         }
-        .frame(maxWidth: .infinity)
+        .frame(maxWidth: .infinity, maxHeight: 20)
         .padding(.horizontal)
     }
 }

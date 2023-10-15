@@ -59,19 +59,14 @@ final class AuthRepository: NSObject {
 
 // Google Sign In
 extension AuthRepository {
-    func signInWithGoogle(presenting: UIViewController, completion: @escaping (Error?) -> Void) {
+    func signInWithGoogle(presenting: UIViewController) async throws {
         let configuration = GIDConfiguration(clientID: AuthServiceCredentials.googleClientID.rawValue)
 
         GIDSignIn.sharedInstance.configuration = configuration
-        GIDSignIn.sharedInstance.signIn(withPresenting: presenting) { authResult, error in
-            if let error = error {
-                print(error)
-                completion(error)
-            }
+        do {
+            let result = try await GIDSignIn.sharedInstance.signIn(withPresenting: presenting)
 
-            guard let authResult = authResult,
-                  let profile = authResult.user.profile
-            else { return }
+            guard let profile = result.user.profile else { return }
 
             self.loginSuccess(
                 name: profile.name,
@@ -79,7 +74,8 @@ extension AuthRepository {
                 photo: profile.imageURL(withDimension: 800)?.absoluteString,
                 authServiceType: .google
             )
-            print(authResult)
+        } catch {
+            throw error
         }
     }
 

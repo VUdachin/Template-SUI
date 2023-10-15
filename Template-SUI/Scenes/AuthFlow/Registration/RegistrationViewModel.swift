@@ -44,9 +44,12 @@ final class RegistrationViewModel {
         )
     }
 
-    func signInWithGoogle(presenting: UIViewController) {
-        authRepository.signInWithGoogle(presenting: presenting) { error in
-            print(error)
+    func signInWithGoogle(presenting: UIViewController) async throws {
+        do {
+            try await authRepository.signInWithGoogle(presenting: presenting)
+        } catch {
+            print(error.localizedDescription)
+            // Create error
         }
     }
 
