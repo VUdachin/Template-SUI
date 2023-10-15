@@ -17,6 +17,10 @@
 		B1ED2F8C2ADC027500F3967A /* View+RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1ED2F8B2ADC027500F3967A /* View+RootViewController.swift */; };
 		B1ED2F8E2ADC0D2C00F3967A /* UserDefaults+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1ED2F8D2ADC0D2C00F3967A /* UserDefaults+Keys.swift */; };
 		B1ED2F912ADC26C000F3967A /* AuthServicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1ED2F902ADC26C000F3967A /* AuthServicesView.swift */; };
+		B1ED2F982ADC350400F3967A /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1ED2F972ADC350400F3967A /* AuthError.swift */; };
+		B1ED2F9A2ADC354F00F3967A /* AuthCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1ED2F992ADC354F00F3967A /* AuthCredentials.swift */; };
+		B1ED2F9D2ADC383800F3967A /* AuthServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1ED2F9C2ADC383800F3967A /* AuthServiceType.swift */; };
+		B1ED2FA02ADC3A5100F3967A /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1ED2F9F2ADC3A5100F3967A /* UserRepository.swift */; };
 		B1FA327C2AD20FC800AA5896 /* Template_SUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FA327B2AD20FC800AA5896 /* Template_SUIApp.swift */; };
 		B1FA327E2AD20FC800AA5896 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FA327D2AD20FC800AA5896 /* ContentView.swift */; };
 		B1FA32802AD20FC800AA5896 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FA327F2AD20FC800AA5896 /* Item.swift */; };
@@ -27,7 +31,7 @@
 		B1FA32962AD21BCD00AA5896 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = B1FA32952AD21BCD00AA5896 /* Kingfisher */; };
 		B1FA32992AD220BD00AA5896 /* ValidationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FA32982AD220BD00AA5896 /* ValidationHelper.swift */; };
 		B1FA329B2AD2228E00AA5896 /* AdaptiveKFImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FA329A2AD2228E00AA5896 /* AdaptiveKFImage.swift */; };
-		B1FA329E2AD227F300AA5896 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FA329D2AD227F300AA5896 /* AuthService.swift */; };
+		B1FA329E2AD227F300AA5896 /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FA329D2AD227F300AA5896 /* AuthRepository.swift */; };
 		B1FA32A12AD228BD00AA5896 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = B1FA32A02AD228BD00AA5896 /* GoogleSignIn */; };
 		B1FA32A32AD228BD00AA5896 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B1FA32A22AD228BD00AA5896 /* GoogleSignInSwift */; };
 		B1FA32A62AD22C1100AA5896 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FA32A52AD22C1100AA5896 /* LoginView.swift */; };
@@ -44,6 +48,11 @@
 		B1ED2F8B2ADC027500F3967A /* View+RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+RootViewController.swift"; sourceTree = "<group>"; };
 		B1ED2F8D2ADC0D2C00F3967A /* UserDefaults+Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Keys.swift"; sourceTree = "<group>"; };
 		B1ED2F902ADC26C000F3967A /* AuthServicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServicesView.swift; sourceTree = "<group>"; };
+		B1ED2F942ADC302900F3967A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B1ED2F972ADC350400F3967A /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
+		B1ED2F992ADC354F00F3967A /* AuthCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCredentials.swift; sourceTree = "<group>"; };
+		B1ED2F9C2ADC383800F3967A /* AuthServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServiceType.swift; sourceTree = "<group>"; };
+		B1ED2F9F2ADC3A5100F3967A /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		B1FA32782AD20FC800AA5896 /* Template-SUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Template-SUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1FA327B2AD20FC800AA5896 /* Template_SUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Template_SUIApp.swift; sourceTree = "<group>"; };
 		B1FA327D2AD20FC800AA5896 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -54,7 +63,7 @@
 		B1FA32922AD215EA00AA5896 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		B1FA32982AD220BD00AA5896 /* ValidationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationHelper.swift; sourceTree = "<group>"; };
 		B1FA329A2AD2228E00AA5896 /* AdaptiveKFImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveKFImage.swift; sourceTree = "<group>"; };
-		B1FA329D2AD227F300AA5896 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		B1FA329D2AD227F300AA5896 /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
 		B1FA32A52AD22C1100AA5896 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -86,7 +95,6 @@
 			children = (
 				B125C0492AD359D3005804D5 /* Styles */,
 				B125C0422AD324F3005804D5 /* Views */,
-				B16C44BD2AD2D03000FA5B4B /* Models */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -127,12 +135,32 @@
 			path = Styles;
 			sourceTree = "<group>";
 		};
-		B16C44BD2AD2D03000FA5B4B /* Models */ = {
+		B1ED2F952ADC318900F3967A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B1FA32812AD20FC800AA5896 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		B1ED2F962ADC34EE00F3967A /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				B1FA329D2AD227F300AA5896 /* AuthRepository.swift */,
+				B1ED2F9C2ADC383800F3967A /* AuthServiceType.swift */,
+				B1ED2F972ADC350400F3967A /* AuthError.swift */,
+				B1ED2F992ADC354F00F3967A /* AuthCredentials.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		B1ED2F9E2ADC3A3700F3967A /* User */ = {
 			isa = PBXGroup;
 			children = (
 				B16C44BE2AD2D03800FA5B4B /* User.swift */,
+				B1ED2F9F2ADC3A5100F3967A /* UserRepository.swift */,
 			);
-			path = Models;
+			path = User;
 			sourceTree = "<group>";
 		};
 		B1FA326F2AD20FC800AA5896 = {
@@ -154,12 +182,13 @@
 		B1FA327A2AD20FC800AA5896 /* Template-SUI */ = {
 			isa = PBXGroup;
 			children = (
+				B1ED2F942ADC302900F3967A /* Info.plist */,
 				B125C0402AD30883005804D5 /* Common */,
 				B1FA329C2AD227D200AA5896 /* Repositories */,
 				B1FA32972AD2208300AA5896 /* Helpers */,
 				B1FA328B2AD211F900AA5896 /* Scenes */,
 				B1FA327B2AD20FC800AA5896 /* Template_SUIApp.swift */,
-				B1FA32812AD20FC800AA5896 /* Assets.xcassets */,
+				B1ED2F952ADC318900F3967A /* Resources */,
 				B1FA32832AD20FC800AA5896 /* Preview Content */,
 			);
 			path = "Template-SUI";
@@ -230,7 +259,8 @@
 		B1FA329C2AD227D200AA5896 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				B1FA329D2AD227F300AA5896 /* AuthService.swift */,
+				B1ED2F9E2ADC3A3700F3967A /* User */,
+				B1ED2F962ADC34EE00F3967A /* Auth */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -326,18 +356,22 @@
 				B1FA32932AD215EA00AA5896 /* ProfileView.swift in Sources */,
 				B1ED2F8C2ADC027500F3967A /* View+RootViewController.swift in Sources */,
 				B125C03C2AD2F5E9005804D5 /* RegistrationViewModel.swift in Sources */,
+				B1ED2F9D2ADC383800F3967A /* AuthServiceType.swift in Sources */,
 				B1FA327E2AD20FC800AA5896 /* ContentView.swift in Sources */,
 				B125C0462AD355EE005804D5 /* ResetPasswordView.swift in Sources */,
 				B125C03F2AD30759005804D5 /* RegistrationView.swift in Sources */,
 				B125C0482AD3568E005804D5 /* ResetPasswordViewModel.swift in Sources */,
 				B1FA32802AD20FC800AA5896 /* Item.swift in Sources */,
 				B1FA32A62AD22C1100AA5896 /* LoginView.swift in Sources */,
-				B1FA329E2AD227F300AA5896 /* AuthService.swift in Sources */,
+				B1FA329E2AD227F300AA5896 /* AuthRepository.swift in Sources */,
 				B1FA328E2AD2122E00AA5896 /* RootView.swift in Sources */,
 				B1FA32992AD220BD00AA5896 /* ValidationHelper.swift in Sources */,
+				B1ED2FA02ADC3A5100F3967A /* UserRepository.swift in Sources */,
 				B1ED2F8E2ADC0D2C00F3967A /* UserDefaults+Keys.swift in Sources */,
 				B1FA329B2AD2228E00AA5896 /* AdaptiveKFImage.swift in Sources */,
+				B1ED2F982ADC350400F3967A /* AuthError.swift in Sources */,
 				B16C44BC2AD2CCEA00FA5B4B /* LoginViewModel.swift in Sources */,
+				B1ED2F9A2ADC354F00F3967A /* AuthCredentials.swift in Sources */,
 				B1ED2F912ADC26C000F3967A /* AuthServicesView.swift in Sources */,
 				B1FA327C2AD20FC800AA5896 /* Template_SUIApp.swift in Sources */,
 				B16C44BF2AD2D03800FA5B4B /* User.swift in Sources */,
@@ -478,6 +512,7 @@
 				DEVELOPMENT_TEAM = 5C5R3P6NHR;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Template-SUI/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -507,6 +542,7 @@
 				DEVELOPMENT_TEAM = 5C5R3P6NHR;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Template-SUI/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

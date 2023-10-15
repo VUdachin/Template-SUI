@@ -9,11 +9,6 @@ import SwiftUI
 import GoogleSignIn
 import GoogleSignInSwift
 
-enum AuthServiceType {
-    case apple
-    case google
-}
-
 struct AuthServicesView: View {
     var action: (AuthServiceType) -> Void
 

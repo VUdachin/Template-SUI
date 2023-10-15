@@ -9,11 +9,11 @@ import Foundation
 
 @Observable
 final class ResetPasswordViewModel {
-    private let authService: AuthService
+    private let authRepository: AuthRepository
     private let validationHelper: ValidationHelper
 
     init(email: String = "") {
-        self.authService = AuthService()
+        self.authRepository = AuthRepository.shared
         self.validationHelper = ValidationHelper()
         self.email = email
     }
@@ -22,7 +22,7 @@ final class ResetPasswordViewModel {
     var isEmailValid: Bool = true
 
     func resetPassword() async throws {
-        try await authService.resetPassword(email: email)
+        try await authRepository.resetPassword(email: email)
     }
 
     func checkEmailValidity() {

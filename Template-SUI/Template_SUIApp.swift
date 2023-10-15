@@ -7,6 +7,17 @@
 
 import SwiftUI
 import SwiftData
+import GoogleSignIn
+
+final class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(
+        _ app: UIApplication,
+        open url: URL,
+        options: [UIApplication.OpenURLOptionsKey : Any] = [:]
+    ) -> Bool {
+        GIDSignIn.sharedInstance.handle(url)
+    }
+}
 
 @main
 struct Template_SUIApp: App {

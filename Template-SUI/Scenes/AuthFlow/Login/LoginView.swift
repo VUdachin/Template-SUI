@@ -86,6 +86,7 @@ struct LoginView: View {
                     viewModel.signInWithApple()
                 case .google:
                     viewModel.signInWithGoogle(presenting: getRootViewController())
+                case .emailPassword: break
                 }
             }
 

@@ -10,11 +10,11 @@ import SwiftUI
 
 @Observable
 final class RegistrationViewModel {
-    private let authService: AuthService
+    private let authRepository: AuthRepository
     private let validationHelper: ValidationHelper
 
     init(email: String = "") {
-        self.authService = AuthService()
+        self.authRepository = AuthRepository.shared
         self.validationHelper = ValidationHelper()
         self.email = email
     }
@@ -37,7 +37,7 @@ final class RegistrationViewModel {
             throw AuthError.validationError
         }
 
-        try await authService.createUser(
+        try await authRepository.createUser(
             email: email,
             password: password,
             fullname: fullName
@@ -45,13 +45,13 @@ final class RegistrationViewModel {
     }
 
     func signInWithGoogle(presenting: UIViewController) {
-        authService.signInWithGoogle(presenting: presenting) { error in
+        authRepository.signInWithGoogle(presenting: presenting) { error in
             print(error)
         }
     }
 
     func signInWithApple() {
-        authService.performAppleSignIn()
+        authRepository.performAppleSignIn()
     }
 
     func toggleSecure() {

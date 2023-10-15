@@ -10,5 +10,6 @@ import Foundation
 struct User {
     var name: String?
     var email: String
-    var password: String
+    var photo: String?
+    var authServiceType: AuthServiceType
 }
