@@ -10,6 +10,8 @@ import SwiftData
 
 @main
 struct Template_SUIApp: App {
+    @AppStorage(StorageKey.isSignedIn.rawValue) var isSignedIn: Bool = false
+
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Item.self,
@@ -25,7 +27,11 @@ struct Template_SUIApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if isSignedIn {
+                RootView()
+            } else {
+                LoginView()
+            }
         }
         .modelContainer(sharedModelContainer)
     }

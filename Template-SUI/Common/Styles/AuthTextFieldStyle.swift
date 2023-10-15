@@ -12,7 +12,7 @@ struct AuthTextFieldStyle: TextFieldStyle {
         configuration
             .disableAutocorrection(true)
             .font(.subheadline)
-            .frame(height: 48)
+            .frame(height: 50)
             .padding(.horizontal, 12)
             .background(Color(.systemGray6))
             .cornerRadius(10)

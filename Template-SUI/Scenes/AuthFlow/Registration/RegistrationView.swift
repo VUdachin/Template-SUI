@@ -6,81 +6,85 @@
 //
 
 import SwiftUI
-import GoogleSignIn
-import GoogleSignInSwift
 
 struct RegistrationView: View {
-    @Environment(RegistrationViewModel.self) var viewModel
+    @State var viewModel = RegistrationViewModel()
 
     var body: some View {
-        @Bindable var viewModel = viewModel
+        VStack {
+            Group {
+                Text("Register")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.vertical, 4)
+                    .padding(.horizontal, 16)
 
-        Group {
-            TextField("Enter your email", text: $viewModel.email) { _ in
-                if !viewModel.isEmailValid {
-                    viewModel.checkEmailValidity()
+                TextField("Enter your email", text: $viewModel.email) { _ in
+                    if !viewModel.isEmailValid {
+                        viewModel.checkEmailValidity()
+                    }
                 }
-            }
-            .textContentType(.emailAddress)
+                .textContentType(.emailAddress)
 
-            TextField("Enter your name", text: $viewModel.fullName)
-                .textContentType(.name)
+                TextField("Enter your name", text: $viewModel.fullName)
+                    .textContentType(.name)
 
-            VStack {
-                if viewModel.isPasswordSecured {
-                    SecureField("Enter your password", text: $viewModel.password)
-                    // тут тоже проверка
-                } else {
-                    TextField("Enter your password", text: $viewModel.password) { _ in
-                        if !viewModel.isPasswodValid {
-                            viewModel.checkPasswordValidity()
+                VStack {
+                    if viewModel.isPasswordSecured {
+                        SecureField("Enter your password", text: $viewModel.password)
+                        // тут тоже проверка
+                    } else {
+                        TextField("Enter your password", text: $viewModel.password) { _ in
+                            if !viewModel.isPasswodValid {
+                                viewModel.checkPasswordValidity()
+                            }
                         }
                     }
                 }
+                .textContentType(.password)
+                .overlay(
+                    Button(action: {
+                        viewModel.toggleSecure()
+                    }, label: {
+                        Image(systemName: viewModel.isPasswordSecured ? "eye.fill" : "eye.slash.fill")
+                            .foregroundStyle(.black)
+                    })
+                    .padding(.horizontal, 28),
+                    alignment: .trailing
+                )
             }
-            .textContentType(.password)
-            .overlay(
-                Button(action: {
-                    viewModel.toggleSecure()
-                }, label: {
-                    Image(systemName: viewModel.isPasswordSecured ? "eye.fill" : "eye.slash.fill")
-                        .foregroundStyle(.black)
-                })
-                .padding(.horizontal, 28),
-                alignment: .trailing
-            )
+            .textFieldStyle(AuthTextFieldStyle())
+
+            Button(action: {
+                Task { viewModel.createUser }
+            }, label: {
+                Text("Sign Up")
+                    .font(.headline)
+                    .frame(height: 50)
+                    .frame(maxWidth: .infinity)
+                    .foregroundColor(Color.black)
+                    .background(Color.gray)
+                    .cornerRadius(10)
+                    .padding()
+            })
+
+            _serviceDividerView
+
+            AuthServicesView { actionType in
+                switch actionType {
+                case .apple:
+                    viewModel.signInWithApple()
+                case .google:
+                    viewModel.signInWithGoogle(presenting: getRootViewController())
+                }
+            }
+
+            _authSelectionView
         }
-        .textFieldStyle(AuthTextFieldStyle())
-
-
-        Button(action: {
-            Task { viewModel.createUser }
-        }, label: {
-            Text("Sign Up")
-                .font(.headline)
-                .frame(height: 50)
-                .frame(maxWidth: .infinity)
-                .foregroundColor(Color.black)
-                .background(Color.gray)
-                .cornerRadius(8)
-                .padding(.horizontal, 16)
-        })
-
-        _serviceDivider
-
-
-        GoogleSignInButton(style: .icon) {
-            //            GIDSignIn.sharedInstance.signIn(withPresenting: yourViewController) { signInResult, error in
-            //                check `error`; do something with `signInResult`
-            //            }
-        }
-        .clipShape(Circle())
-
-        _bottomBlock
-
     }
 
-    private var _serviceDivider: some View {
+    private var _serviceDividerView: some View {
         Divider()
             .frame(height: 2)
             .background(Color.gray.opacity(0.5))
@@ -93,7 +97,7 @@ struct RegistrationView: View {
             .padding(.horizontal, 16)
     }
 
-    private var _bottomBlock: some View {
+    private var _authSelectionView: some View {
         HStack {
             Text("I have account!")
                 .foregroundColor(Color.gray)
@@ -106,5 +110,4 @@ struct RegistrationView: View {
 
 #Preview {
     RegistrationView()
-        .environment(RegistrationViewModel())
 }

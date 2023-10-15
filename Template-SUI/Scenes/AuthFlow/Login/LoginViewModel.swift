@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 @Observable
 final class LoginViewModel {
@@ -33,6 +34,16 @@ final class LoginViewModel {
         }
 
         try await authService.login(email: email, password: password)
+    }
+
+    func signInWithGoogle(presenting: UIViewController) {
+        authService.signInWithGoogle(presenting: presenting) { error in
+            print(error)
+        }
+    }
+
+    func signInWithApple() {
+        authService.performAppleSignIn()
     }
 
     func toggleSecure() {

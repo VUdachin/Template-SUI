@@ -6,15 +6,17 @@
 //
 
 import Foundation
+import SwiftUI
 
 @Observable
 final class RegistrationViewModel {
     private let authService: AuthService
     private let validationHelper: ValidationHelper
 
-    init() {
+    init(email: String = "") {
         self.authService = AuthService()
         self.validationHelper = ValidationHelper()
+        self.email = email
     }
 
     var email: String = ""
@@ -40,6 +42,16 @@ final class RegistrationViewModel {
             password: password,
             fullname: fullName
         )
+    }
+
+    func signInWithGoogle(presenting: UIViewController) {
+        authService.signInWithGoogle(presenting: presenting) { error in
+            print(error)
+        }
+    }
+
+    func signInWithApple() {
+        authService.performAppleSignIn()
     }
 
     func toggleSecure() {
