@@ -85,7 +85,7 @@ struct LoginView: View {
                 case .apple:
                     viewModel.signInWithApple()
                 case .google:
-                    viewModel.signInWithGoogle(presenting: getRootViewController())
+                    Task { await viewModel.signInWithGoogle(presenting: getRootViewController()) }
                 case .emailPassword: break
                 }
             }

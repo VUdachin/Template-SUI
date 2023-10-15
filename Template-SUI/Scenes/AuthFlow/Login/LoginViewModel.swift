@@ -36,7 +36,7 @@ final class LoginViewModel {
         try await authRepository.login(email: email, password: password)
     }
 
-    func signInWithGoogle(presenting: UIViewController) async throws {
+    func signInWithGoogle(presenting: UIViewController) async {
         do {
             try await authRepository.signInWithGoogle(presenting: presenting)
         } catch {
