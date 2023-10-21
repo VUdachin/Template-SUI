@@ -16,6 +16,12 @@ struct ProfileEditView: View {
                 VStack(spacing: 16) {
                     _profilePhoto
 
+                    Button {
+                        Task { try await viewModel.removePhotoTapped() }
+                    } label: {
+                        Text("Remove photo")
+                    }
+
                     Rectangle()
                         .frame(height: 20)
                         .clipShape(
@@ -30,8 +36,7 @@ struct ProfileEditView: View {
 
                 VStack(alignment: .leading) {
                     Text("Username")
-                        .font(.title3)
-                        .bold()
+                        .modifier(TitleTextStyle())
 
                     TextField("Enter your name", text: $viewModel.userName)
                         .autocapitalization(.none)
@@ -41,8 +46,7 @@ struct ProfileEditView: View {
                         .textFieldStyle(AuthTextFieldStyle())
 
                     Text("Email")
-                        .font(.title3)
-                        .bold()
+                        .modifier(TitleTextStyle())
 
                     TextField("Enter your email", text: $viewModel.email)
                         .autocapitalization(.none)
@@ -81,7 +85,7 @@ struct ProfileEditView: View {
                         ,alignment: .bottomTrailing
                     )
             } else {
-                CircleAvatarView(image: .link(viewModel.photo))
+                CircleAvatarView(image: viewModel.photo)
                     .overlay(
                         Image(systemName: "pencil.circle.fill")
                             .resizable()
@@ -101,6 +105,8 @@ struct ProfileEditView: View {
     }
 }
 
+#if DEBUG
 #Preview {
     ProfileEditView(viewModel: ProfileEditViewModel())
 }
+#endif

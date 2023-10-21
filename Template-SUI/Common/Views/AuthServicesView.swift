@@ -33,6 +33,8 @@ struct AuthServicesView: View {
     }
 }
 
+#if DEBUG
 #Preview {
     AuthServicesView(action: { _ in })
 }
+#endif

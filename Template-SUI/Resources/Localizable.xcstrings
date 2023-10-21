@@ -25,10 +25,24 @@
       }
     },
     "Edit profile" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Изменить профиль"
+          }
+        }
+      }
     },
     "Email" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Электронная почта"
+          }
+        }
+      }
     },
     "Enter your email" : {
       "localizations" : {
@@ -97,7 +111,14 @@
       }
     },
     "Logout" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выйти из аккаунта"
+          }
+        }
+      }
     },
     "or login with" : {
       "localizations" : {
@@ -110,7 +131,14 @@
       }
     },
     "Privacy policy" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Политика конфиденциальности"
+          }
+        }
+      }
     },
     "Profile" : {
       "localizations" : {
@@ -132,8 +160,25 @@
         }
       }
     },
+    "Remove photo" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Удалить фото"
+          }
+        }
+      }
+    },
     "Save" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сохранить"
+          }
+        }
+      }
     },
     "Select an item" : {
 
@@ -169,7 +214,14 @@
       }
     },
     "Username" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Имя"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

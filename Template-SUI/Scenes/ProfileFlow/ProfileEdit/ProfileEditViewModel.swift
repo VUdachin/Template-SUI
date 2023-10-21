@@ -14,7 +14,7 @@ final class ProfileEditViewModel {
 
     var userName: String
     var email: String
-    var photo: String?
+    var photo: ImageSourceType
 
     var selectedPhoto: UIImage?
     var isImagePickerPresented = false
@@ -23,11 +23,12 @@ final class ProfileEditViewModel {
         self.userRepository = UserRepository.shared
         self.userName = userRepository.currentUser?.name ?? ""
         self.email = userRepository.currentUser?.email ?? ""
-        self.photo = userRepository.currentUser?.photo
+        self.photo = userRepository.currentUser?.photo ?? .none
     }
 
-    func changePhotoTapped() {
-        isImagePickerPresented = true
+    func removePhotoTapped() async throws {
+        selectedPhoto = nil
+        try await userRepository.removePhoto()
     }
 
     func saveEditsTapped() {
@@ -36,5 +37,9 @@ final class ProfileEditViewModel {
             email: email,
             photo: selectedPhoto
         )
+    }
+
+    func changePhotoTapped() {
+        isImagePickerPresented = true
     }
 }

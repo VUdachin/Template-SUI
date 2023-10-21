@@ -49,6 +49,8 @@ struct ResetPasswordView: View {
     }
 }
 
+#if DEBUG
 #Preview {
     ResetPasswordView()
 }
+#endif

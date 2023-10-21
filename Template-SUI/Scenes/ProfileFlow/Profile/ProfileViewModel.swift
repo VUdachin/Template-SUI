@@ -14,7 +14,7 @@ final class ProfileViewModel {
 
     var userName: String? { userRepository.currentUser?.name }
     var email: String? { userRepository.currentUser?.email }
-    var photo: String? { userRepository.currentUser?.photo }
+    var photo: ImageSourceType { userRepository.currentUser?.photo ?? .none }
 
     init() {
         self.authRepository = AuthRepository.shared

@@ -14,13 +14,13 @@
             filePath = "Template-SUI/Scenes/ProfileFlow/ProfileEdit/ProfileEditViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
             landmarkName = "saveEditsTapped()"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "82368672-5952-46A6-82C7-35C03044414C - f2eed643d002b0b8"
+                  uuid = "82368672-5952-46A6-82C7-35C03044414C - f2eed643d002b37e"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -30,12 +30,12 @@
                   urlString = "file:///Users/vladimirudachin/Desktop/Template-SUI/Template-SUI/Scenes/ProfileFlow/ProfileEdit/ProfileEditViewModel.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "37"
-                  endingLineNumber = "37"
-                  offsetFromSymbolStart = "208">
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "116">
                </Location>
                <Location
-                  uuid = "82368672-5952-46A6-82C7-35C03044414C - f2eed643d002b0b8"
+                  uuid = "82368672-5952-46A6-82C7-35C03044414C - f2eed643d002b31f"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -45,8 +45,8 @@
                   urlString = "file:///Users/vladimirudachin/Desktop/Template-SUI/Template-SUI/Scenes/ProfileFlow/ProfileEdit/ProfileEditViewModel.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "37"
-                  endingLineNumber = "37"
+                  startingLineNumber = "42"
+                  endingLineNumber = "42"
                   offsetFromSymbolStart = "76">
                </Location>
             </Locations>

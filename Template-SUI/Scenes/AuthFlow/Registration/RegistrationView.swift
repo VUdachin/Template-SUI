@@ -95,6 +95,8 @@ struct RegistrationView: View {
     }
 }
 
+#if DEBUG
 #Preview {
     RegistrationView()
 }
+#endif

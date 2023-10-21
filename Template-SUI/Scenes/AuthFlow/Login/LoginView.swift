@@ -122,6 +122,8 @@ struct LoginView: View {
     }
 }
 
+#if DEBUG
 #Preview {
     LoginView()
 }
+#endif

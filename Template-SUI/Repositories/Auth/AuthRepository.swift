@@ -18,10 +18,13 @@ final class AuthRepository: NSObject {
     private override init() {
         self.userRepository = UserRepository.shared
     }
+}
 
+// Default methods
+extension AuthRepository {
     func login(email: String, password: String) async throws {
         do {
-
+            // MARK: - Set your async method here
             let name = ""
 
             loginSuccess(
@@ -35,6 +38,7 @@ final class AuthRepository: NSObject {
 
     func createUser(email: String, password: String, fullname: String) async throws {
         do {
+            // MARK: - Set your async method here
             loginSuccess(
                 name: fullname,
                 email: email,
@@ -51,6 +55,7 @@ final class AuthRepository: NSObject {
 
     func logout() async throws {
         do {
+            // MARK: - Set your async method here
             UserDefaults.standard.set(false, forKey: StorageKey.isSignedIn.rawValue)
             userRepository.currentUser = nil
             logoutGoogle()
@@ -73,7 +78,7 @@ extension AuthRepository {
             self.loginSuccess(
                 name: profile.name,
                 email: profile.email,
-                photo: profile.imageURL(withDimension: 800)?.absoluteString,
+//                photo: .link(profile.imageURL(withDimension: 800)?.absoluteString), // change
                 authServiceType: .google
             )
         } catch {
@@ -123,7 +128,7 @@ extension AuthRepository {
     private func loginSuccess(
         name: String,
         email: String,
-        photo: String? = nil,
+        photo: ImageSourceType = .none,
         authServiceType: AuthServiceType
     ) {
         userRepository.currentUser = User(

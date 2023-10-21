@@ -68,7 +68,7 @@ struct ProfileView: View {
                 .background(Color.gray.opacity(0.7))
 
                 List {
-                    if viewModel.userRepository.currentUser == nil {
+                    if viewModel.userRepository.currentUser != nil {
                         NavigationLink(destination: {
                             ProfileEditView()
                         }, label: {
@@ -99,6 +99,8 @@ struct ProfileView: View {
     }
 }
 
+#if DEBUG
 #Preview {
     ProfileView(viewModel: ProfileViewModel())
 }
+#endif

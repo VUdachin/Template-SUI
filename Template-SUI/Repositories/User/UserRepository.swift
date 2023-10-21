@@ -25,7 +25,11 @@ final class UserRepository {
         updateUserData(userName, email, photo)
     }
 
-    func removePhoto() {}
+    func removePhoto() async throws {
+        do {
+            currentUser?.photo = .none
+        }
+    }
 }
 
 extension UserRepository {
@@ -36,6 +40,6 @@ extension UserRepository {
     ) {
         currentUser?.name = userName
         currentUser?.email = email
-//        currentUser?.photo = photo
+//        currentUser?.photo = .image(photo)
     }
 }

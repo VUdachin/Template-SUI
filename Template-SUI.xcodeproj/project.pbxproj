@@ -13,6 +13,8 @@
 		B125C0482AD3568E005804D5 /* ResetPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B125C0472AD3568E005804D5 /* ResetPasswordViewModel.swift */; };
 		B125C04B2AD359F8005804D5 /* AuthTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B125C04A2AD359F8005804D5 /* AuthTextFieldStyle.swift */; };
 		B126606D2AE4457300991B61 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B126606C2AE4457300991B61 /* ImagePickerView.swift */; };
+		B126606F2AE459D200991B61 /* TextStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = B126606E2AE459D200991B61 /* TextStyles.swift */; };
+		B12660722AE45C4C00991B61 /* ImageSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12660712AE45C4C00991B61 /* ImageSourceType.swift */; };
 		B141D6E52ADF1ED900205BF3 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B141D6E42ADF1ED900205BF3 /* ProfileViewModel.swift */; };
 		B16C44BC2AD2CCEA00FA5B4B /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16C44BB2AD2CCEA00FA5B4B /* LoginViewModel.swift */; };
 		B16C44BF2AD2D03800FA5B4B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16C44BE2AD2D03800FA5B4B /* User.swift */; };
@@ -51,6 +53,8 @@
 		B125C0472AD3568E005804D5 /* ResetPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewModel.swift; sourceTree = "<group>"; };
 		B125C04A2AD359F8005804D5 /* AuthTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTextFieldStyle.swift; sourceTree = "<group>"; };
 		B126606C2AE4457300991B61 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
+		B126606E2AE459D200991B61 /* TextStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyles.swift; sourceTree = "<group>"; };
+		B12660712AE45C4C00991B61 /* ImageSourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSourceType.swift; sourceTree = "<group>"; };
 		B141D6E42ADF1ED900205BF3 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		B16C44BB2AD2CCEA00FA5B4B /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		B16C44BE2AD2D03800FA5B4B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -107,6 +111,7 @@
 		B125C0402AD30883005804D5 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				B12660702AE45C3700991B61 /* Models */,
 				B125C0492AD359D3005804D5 /* Styles */,
 				B125C0422AD324F3005804D5 /* Views */,
 			);
@@ -147,8 +152,18 @@
 			isa = PBXGroup;
 			children = (
 				B125C04A2AD359F8005804D5 /* AuthTextFieldStyle.swift */,
+				B126606E2AE459D200991B61 /* TextStyles.swift */,
 			);
 			path = Styles;
+			sourceTree = "<group>";
+		};
+		B12660702AE45C3700991B61 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B16C44BE2AD2D03800FA5B4B /* User.swift */,
+				B12660712AE45C4C00991B61 /* ImageSourceType.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		B1B28CBE2AE06CC900A33B4E /* UI */ = {
@@ -201,7 +216,6 @@
 		B1ED2F9E2ADC3A3700F3967A /* User */ = {
 			isa = PBXGroup;
 			children = (
-				B16C44BE2AD2D03800FA5B4B /* User.swift */,
 				B1ED2F9F2ADC3A5100F3967A /* UserRepository.swift */,
 			);
 			path = User;
@@ -400,6 +414,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B126606F2AE459D200991B61 /* TextStyles.swift in Sources */,
 				B1FA32932AD215EA00AA5896 /* ProfileView.swift in Sources */,
 				B1B28CC62AE0720F00A33B4E /* ProfileEditView.swift in Sources */,
 				B1ED2F8C2ADC027500F3967A /* View+RootViewController.swift in Sources */,
@@ -426,6 +441,7 @@
 				B126606D2AE4457300991B61 /* ImagePickerView.swift in Sources */,
 				B1ED2F9A2ADC354F00F3967A /* AuthCredentials.swift in Sources */,
 				B1ED2F912ADC26C000F3967A /* AuthServicesView.swift in Sources */,
+				B12660722AE45C4C00991B61 /* ImageSourceType.swift in Sources */,
 				B1FA327C2AD20FC800AA5896 /* Template_SUIApp.swift in Sources */,
 				B16C44BF2AD2D03800FA5B4B /* User.swift in Sources */,
 				B125C04B2AD359F8005804D5 /* AuthTextFieldStyle.swift in Sources */,

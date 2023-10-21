@@ -10,6 +10,6 @@ import Foundation
 struct User {
     var name: String
     var email: String
-    var photo: String?
+    var photo: ImageSourceType
     var authServiceType: AuthServiceType
 }
