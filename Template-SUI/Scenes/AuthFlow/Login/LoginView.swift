@@ -12,14 +12,14 @@ struct LoginView: View {
 
     var body: some View {
         NavigationStack {
-            Group {
-                Text("Login")
-                    .font(.title)
-                    .fontWeight(.bold)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.vertical, 4)
-                    .padding(.horizontal, 16)
+            Text("Login")
+                .font(.title)
+                .fontWeight(.bold)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.vertical, 4)
+                .padding(.horizontal, 16)
 
+            Group {
                 TextField("Enter your email", text: $viewModel.email) { _ in
                     if !viewModel.isEmailValid {
                         viewModel.checkEmailValidity()
@@ -51,6 +51,7 @@ struct LoginView: View {
                     alignment: .trailing
                 )
             }
+            .padding(.horizontal, 16)
             .textFieldStyle(AuthTextFieldStyle())
 
             NavigationLink(destination: {

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "36E65CF3-AF18-4640-8DB6-66C0ABCF4981"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "82368672-5952-46A6-82C7-35C03044414C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Template-SUI/Scenes/ProfileFlow/ProfileEdit/ProfileEditViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "saveEditsTapped()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "82368672-5952-46A6-82C7-35C03044414C - f2eed643d002b0b8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Template_SUI.ProfileEditViewModel.saveEditsTapped() -&gt; ()"
+                  moduleName = "Template-SUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladimirudachin/Desktop/Template-SUI/Template-SUI/Scenes/ProfileFlow/ProfileEdit/ProfileEditViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "37"
+                  endingLineNumber = "37"
+                  offsetFromSymbolStart = "208">
+               </Location>
+               <Location
+                  uuid = "82368672-5952-46A6-82C7-35C03044414C - f2eed643d002b0b8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Template_SUI.ProfileEditViewModel.saveEditsTapped() -&gt; ()"
+                  moduleName = "Template-SUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladimirudachin/Desktop/Template-SUI/Template-SUI/Scenes/ProfileFlow/ProfileEdit/ProfileEditViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "37"
+                  endingLineNumber = "37"
+                  offsetFromSymbolStart = "76">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

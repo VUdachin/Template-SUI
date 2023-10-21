@@ -11,7 +11,7 @@ import GoogleSignIn
 import AuthenticationServices
 
 final class AuthRepository: NSObject {
-    let userRepository: UserRepository
+    private let userRepository: UserRepository
 
     static let shared = AuthRepository()
 
@@ -51,7 +51,9 @@ final class AuthRepository: NSObject {
 
     func logout() async throws {
         do {
+            UserDefaults.standard.set(false, forKey: StorageKey.isSignedIn.rawValue)
             userRepository.currentUser = nil
+            logoutGoogle()
         }
         catch {}
     }
@@ -81,7 +83,6 @@ extension AuthRepository {
 
     func logoutGoogle() {
         GIDSignIn.sharedInstance.signOut()
-        userRepository.currentUser = nil
     }
 }
 

@@ -38,7 +38,7 @@ struct Template_SUIApp: App {
 
     var body: some Scene {
         WindowGroup {
-            if isSignedIn {
+            if !isSignedIn {
                 RootView()
             } else {
                 LoginView()

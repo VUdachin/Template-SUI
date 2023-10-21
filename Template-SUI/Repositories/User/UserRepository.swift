@@ -17,11 +17,25 @@ final class UserRepository {
         self.currentUser = currentUser // Set data from storage
     }
 
-    func changeName(to: String) {}
-
-    func changeEmail(to: String) {}
-
-    func savePhoto(photo: UIImage) {}
+    func changeUserData(
+        userName: String,
+        email: String,
+        photo: UIImage?
+    ) {
+        updateUserData(userName, email, photo)
+    }
 
     func removePhoto() {}
+}
+
+extension UserRepository {
+    private func updateUserData(
+        _ userName: String,
+        _ email: String,
+        _ photo: UIImage?
+    ) {
+        currentUser?.name = userName
+        currentUser?.email = email
+//        currentUser?.photo = photo
+    }
 }

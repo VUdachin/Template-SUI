@@ -8,7 +8,7 @@
 import Foundation
 
 struct User {
-    var name: String?
+    var name: String
     var email: String
     var photo: String?
     var authServiceType: AuthServiceType

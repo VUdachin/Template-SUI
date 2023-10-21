@@ -24,6 +24,12 @@
         }
       }
     },
+    "Edit profile" : {
+
+    },
+    "Email" : {
+
+    },
     "Enter your email" : {
       "localizations" : {
         "ru" : {
@@ -64,9 +70,6 @@
         }
       }
     },
-    "Hello, World!" : {
-
-    },
     "Home" : {
       "localizations" : {
         "ru" : {
@@ -80,6 +83,9 @@
     "Item at %@" : {
 
     },
+    "Log in or register to take full advantage of the app." : {
+
+    },
     "Login" : {
       "localizations" : {
         "ru" : {
@@ -90,6 +96,9 @@
         }
       }
     },
+    "Logout" : {
+
+    },
     "or login with" : {
       "localizations" : {
         "ru" : {
@@ -99,6 +108,9 @@
           }
         }
       }
+    },
+    "Privacy policy" : {
+
     },
     "Profile" : {
       "localizations" : {
@@ -119,6 +131,9 @@
           }
         }
       }
+    },
+    "Save" : {
+
     },
     "Select an item" : {
 
@@ -152,6 +167,9 @@
           }
         }
       }
+    },
+    "Username" : {
+
     }
   },
   "version" : "1.0"

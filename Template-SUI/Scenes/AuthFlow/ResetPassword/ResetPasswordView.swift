@@ -31,6 +31,7 @@ struct ResetPasswordView: View {
             }
         }
         .textContentType(.emailAddress)
+        .padding(.horizontal, 16)
         .textFieldStyle(AuthTextFieldStyle())
 
         Button(action: {
