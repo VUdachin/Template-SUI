@@ -7,39 +7,79 @@
 
 import Foundation
 import UIKit
+import Firebase
 
+@Observable
 final class UserRepository {
-    var currentUser: User?
+    private let firebaseRepository: FirebaseRepository
+    var currentUser: Firebase.User?
 
     static let shared = UserRepository()
 
-    private init(currentUser: User? = nil) {
-        self.currentUser = currentUser // Set data from storage
+    private init() {
+        self.firebaseRepository = FirebaseRepository.shared
+        self.currentUser = firebaseRepository.auth.currentUser
     }
 
     func changeUserData(
         userName: String,
         email: String,
         photo: UIImage?
-    ) {
-        updateUserData(userName, email, photo)
+    ) async throws {
+        do {
+            try await updateUserEmail(email)
+
+            let changeRequest = firebaseRepository.auth.currentUser?.createProfileChangeRequest()
+            changeRequest?.displayName = userName
+            if let path = try await getSavedPhotoPath(photo: photo) {
+                changeRequest?.photoURL = URL(string: path)
+            }
+
+            try await changeRequest?.commitChanges()
+        } catch {
+            throw error
+        }
     }
 
     func removePhoto() async throws {
         do {
-            currentUser?.photo = .none
+            let changeRequest = firebaseRepository.auth.currentUser?.createProfileChangeRequest()
+            changeRequest?.photoURL = nil
+            try await changeRequest?.commitChanges()
+        } catch {
+            throw error
         }
+    }
+
+    func deleteUser() async throws {
+        do {
+            let user = firebaseRepository.auth.currentUser
+            try await user?.delete()
+        } catch {
+            throw error
+        }
+
     }
 }
 
 extension UserRepository {
-    private func updateUserData(
-        _ userName: String,
-        _ email: String,
-        _ photo: UIImage?
-    ) {
-        currentUser?.name = userName
-        currentUser?.email = email
-//        currentUser?.photo = .image(photo)
+    private func getSavedPhotoPath(photo: UIImage?) async throws -> String? {
+        do {
+            guard let data = photo?.pngData(), let currentUser else { return nil }
+
+            let photosRef = firebaseRepository.storage.reference().child("photos/\(currentUser.uid)")
+            try await photosRef.putDataAsync(data)
+            return try await photosRef.downloadURL().absoluteString
+        } catch {
+            throw error
+        }
+    }
+
+    private func updateUserEmail(_ newEmail: String) async throws {
+        do {
+            try await firebaseRepository.auth.currentUser?.updateEmail(to: newEmail)
+        } catch {
+            throw error
+        }
     }
 }

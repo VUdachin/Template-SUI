@@ -8,8 +8,20 @@
 import SwiftUI
 import SwiftData
 import GoogleSignIn
+import FirebaseCore
+import FirebaseAuth
 
 final class AppDelegate: NSObject, UIApplicationDelegate {
+
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
+    ) -> Bool {
+        FirebaseApp.configure()
+
+        return true
+    }
+
     func application(
         _ app: UIApplication,
         open url: URL,
@@ -21,6 +33,7 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct Template_SUIApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @AppStorage(StorageKey.isSignedIn.rawValue) var isSignedIn: Bool = false
 
     var sharedModelContainer: ModelContainer = {
@@ -38,7 +51,7 @@ struct Template_SUIApp: App {
 
     var body: some Scene {
         WindowGroup {
-            if !isSignedIn {
+            if isSignedIn {
                 RootView()
             } else {
                 LoginView()

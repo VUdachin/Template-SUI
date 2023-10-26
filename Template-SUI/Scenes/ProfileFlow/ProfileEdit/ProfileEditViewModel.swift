@@ -14,29 +14,45 @@ final class ProfileEditViewModel {
 
     var userName: String
     var email: String
-    var photo: ImageSourceType
+    var photoURL: URL?
 
     var selectedPhoto: UIImage?
     var isImagePickerPresented = false
+    var shouldDismiss = false
 
     init() {
         self.userRepository = UserRepository.shared
-        self.userName = userRepository.currentUser?.name ?? ""
+        self.userName = userRepository.currentUser?.displayName ?? ""
         self.email = userRepository.currentUser?.email ?? ""
-        self.photo = userRepository.currentUser?.photo ?? .none
+        self.photoURL = userRepository.currentUser?.photoURL
+    }
+
+    deinit {
+        print("deinit")
     }
 
     func removePhotoTapped() async throws {
-        selectedPhoto = nil
-        try await userRepository.removePhoto()
+        do {
+            try await userRepository.removePhoto()
+            selectedPhoto = nil
+            shouldDismiss.toggle()
+        } catch {
+            print(error)
+        }
     }
 
-    func saveEditsTapped() {
-        userRepository.changeUserData(
-            userName: userName,
-            email: email,
-            photo: selectedPhoto
-        )
+    func saveEditsTapped() async throws {
+        do {
+            try await userRepository.changeUserData(
+                userName: userName,
+                email: email,
+                photo: selectedPhoto
+            )
+            shouldDismiss.toggle()
+        } catch {
+            print(error)
+        }
+
     }
 
     func changePhotoTapped() {

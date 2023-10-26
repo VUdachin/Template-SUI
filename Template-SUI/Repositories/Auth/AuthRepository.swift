@@ -5,18 +5,24 @@
 //  Created by Vladimir Udachin on 08.10.2023.
 //
 
-import Foundation
 import SwiftUI
 import GoogleSignIn
 import AuthenticationServices
+import FirebaseCore
+import FirebaseAuth
 
 final class AuthRepository: NSObject {
     private let userRepository: UserRepository
+    private let firebaseRepository: FirebaseRepository
 
     static let shared = AuthRepository()
 
+    // For Sign in with Apple
+    var currentNonce: String?
+
     private override init() {
         self.userRepository = UserRepository.shared
+        self.firebaseRepository = FirebaseRepository.shared
     }
 }
 
@@ -24,43 +30,39 @@ final class AuthRepository: NSObject {
 extension AuthRepository {
     func login(email: String, password: String) async throws {
         do {
-            // MARK: - Set your async method here
-            let name = ""
-
-            loginSuccess(
-                name: name,
-                email: email,
-                authServiceType: .emailPassword
-            )
+            try await firebaseRepository.auth.signIn(withEmail: email, password: password)
+            authSuccess()
+        } catch {
+            throw error
         }
-        catch {}
     }
 
     func createUser(email: String, password: String, fullname: String) async throws {
         do {
-            // MARK: - Set your async method here
-            loginSuccess(
-                name: fullname,
-                email: email,
-                authServiceType: .emailPassword
-            )
+            try await firebaseRepository.auth.createUser(withEmail: email, password: password)
+            authSuccess()
+        } catch {
+            throw error
         }
-        catch {}
     }
 
     func resetPassword(email: String) async throws {
-        do {}
-        catch {}
+        do {
+            try await firebaseRepository.auth.sendPasswordReset(withEmail: email)
+        } catch {
+            throw error
+        }
     }
 
     func logout() async throws {
         do {
-            // MARK: - Set your async method here
+            try firebaseRepository.auth.signOut()
             UserDefaults.standard.set(false, forKey: StorageKey.isSignedIn.rawValue)
             userRepository.currentUser = nil
             logoutGoogle()
+        } catch {
+            throw error
         }
-        catch {}
     }
 }
 
@@ -72,15 +74,11 @@ extension AuthRepository {
         GIDSignIn.sharedInstance.configuration = configuration
         do {
             let result = try await GIDSignIn.sharedInstance.signIn(withPresenting: presenting)
+            guard let idToken = result.user.idToken?.tokenString else { return }
 
-            guard let profile = result.user.profile else { return }
-
-            self.loginSuccess(
-                name: profile.name,
-                email: profile.email,
-//                photo: .link(profile.imageURL(withDimension: 800)?.absoluteString), // change
-                authServiceType: .google
-            )
+            let credential = GoogleAuthProvider.credential(withIDToken: idToken,
+                                                           accessToken: result.user.accessToken.tokenString)
+            try await firebaseAuth(credential: credential)
         } catch {
             throw error
         }
@@ -94,6 +92,24 @@ extension AuthRepository {
 // Apple Sign In
 extension AuthRepository: ASAuthorizationControllerDelegate {
     func performAppleSignIn() {
+        do {
+            let nonce = try CryptoUtils.randomNonceString()
+            currentNonce = nonce
+
+            let appleIDProvider = ASAuthorizationAppleIDProvider()
+            let request = appleIDProvider.createRequest()
+            request.requestedScopes = [.fullName, .email]
+            request.nonce = CryptoUtils.sha256(nonce)
+
+            let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+            authorizationController.delegate = self
+            //          authorizationController.presentationContextProvider = self // ??
+            authorizationController.performRequests()
+        } catch {
+            // In the unlikely case that nonce generation fails, show error view.
+            print(error)
+        }
+
         let provider = ASAuthorizationAppleIDProvider()
         let request = provider.createRequest()
         request.requestedScopes = [.fullName, .email]
@@ -102,21 +118,45 @@ extension AuthRepository: ASAuthorizationControllerDelegate {
         controller.performRequests()
     }
 
-    func authorizationController(controller: ASAuthorizationController,
-                                 didCompleteWithAuthorization authorization: ASAuthorization) {
-        if let appleIdCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
-            guard 
-                let name = appleIdCredential.fullName?.givenName,
-                let surname = appleIdCredential.fullName?.familyName,
-                let email = appleIdCredential.email
-            else { return }
-
-            loginSuccess(
-                name: "\(name) \(surname)",
-                email: email,
-                authServiceType: .apple
-            )
+    private func authorizationController(
+        controller: ASAuthorizationController,
+        didCompleteWithAuthorization authorization: ASAuthorization
+    ) async throws {
+        guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential
+        else {
+            print("Unable to retrieve AppleIDCredential")
+            return
         }
+
+        guard let nonce = currentNonce else {
+            fatalError("Invalid state: A login callback was received, but no login request was sent.")
+        }
+
+        guard let appleIDToken = appleIDCredential.identityToken else {
+            print("Unable to fetch identity token")
+            return
+        }
+        guard let appleAuthCode = appleIDCredential.authorizationCode else {
+            print("Unable to fetch authorization code")
+            return
+        }
+        guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
+            print("Unable to serialize token string from data: \(appleIDToken.debugDescription)")
+            return
+        }
+
+        guard let _ = String(data: appleAuthCode, encoding: .utf8) else {
+            print("Unable to serialize auth code string from data: \(appleAuthCode.debugDescription)")
+            return
+        }
+        
+        let firebaseCredential = OAuthProvider.appleCredential(
+            withIDToken: idTokenString,
+            rawNonce: nonce,
+            fullName: appleIDCredential.fullName
+        )
+
+        try await firebaseAuth(credential: firebaseCredential)
     }
 
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
@@ -125,18 +165,16 @@ extension AuthRepository: ASAuthorizationControllerDelegate {
 }
 
 extension AuthRepository {
-    private func loginSuccess(
-        name: String,
-        email: String,
-        photo: ImageSourceType = .none,
-        authServiceType: AuthServiceType
-    ) {
-        userRepository.currentUser = User(
-            name: name,
-            email: email,
-            photo: photo,
-            authServiceType: authServiceType
-        )
+    private func authSuccess() {
         UserDefaults.standard.set(true, forKey: StorageKey.isSignedIn.rawValue)
+    }
+
+    private func firebaseAuth(credential: AuthCredential) async throws {
+        do {
+            try await firebaseRepository.auth.signIn(with: credential)
+            authSuccess()
+        } catch {
+            throw error
+        }
     }
 }

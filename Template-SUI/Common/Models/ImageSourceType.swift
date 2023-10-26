@@ -8,7 +8,7 @@
 import UIKit
 
 enum ImageSourceType {
-    case link(String)
+    case link(URL?)
     case image(UIImage)
     case none
 }

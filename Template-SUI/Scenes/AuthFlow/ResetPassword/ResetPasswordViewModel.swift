@@ -22,7 +22,11 @@ final class ResetPasswordViewModel {
     var isEmailValid: Bool = true
 
     func resetPassword() async throws {
-        try await authRepository.resetPassword(email: email)
+        do {
+            try await authRepository.resetPassword(email: email)
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 
     func checkEmailValidity() {

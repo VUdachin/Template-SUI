@@ -18,7 +18,7 @@ struct ProfileView: View {
                         ProfileSummaryView(
                             userName: userName,
                             email: email,
-                            image: viewModel.photo
+                            image: .link(viewModel.photo)
                         )
                     } else {
                         Text("Log in or register to take full advantage of the app.")

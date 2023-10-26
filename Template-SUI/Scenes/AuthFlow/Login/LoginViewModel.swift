@@ -33,7 +33,11 @@ final class LoginViewModel {
             throw AuthError.validationError
         }
 
-        try await authRepository.login(email: email, password: password)
+        do {
+            try await authRepository.login(email: email, password: password)
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 
     func signInWithGoogle(presenting: UIViewController) async {
@@ -41,7 +45,6 @@ final class LoginViewModel {
             try await authRepository.signInWithGoogle(presenting: presenting)
         } catch {
             print(error.localizedDescription)
-            // Create error
         }
     }
 

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ProfileEditView: View {
     @State var viewModel = ProfileEditViewModel()
+    @Environment(\.dismiss) var dismiss
 
     var body: some View {
         NavigationStack {
@@ -65,9 +66,12 @@ struct ProfileEditView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Save") {
-                        viewModel.saveEditsTapped()
+                        Task { try await viewModel.saveEditsTapped() }
                     }
                 }
+            }
+            .onChange(of: viewModel.shouldDismiss) {
+                dismiss()
             }
         }
     }
@@ -85,7 +89,7 @@ struct ProfileEditView: View {
                         ,alignment: .bottomTrailing
                     )
             } else {
-                CircleAvatarView(image: viewModel.photo)
+                CircleAvatarView(image: .link(viewModel.photoURL))
                     .overlay(
                         Image(systemName: "pencil.circle.fill")
                             .resizable()

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct User {
+struct UserLocal {
     var name: String
     var email: String
     var photo: ImageSourceType

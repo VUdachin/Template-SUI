@@ -9,5 +9,5 @@ import Foundation
 
 // TODO: Remove before 1.0
 enum AuthServiceCredentials: String {
-    case googleClientID = "1059441446701-tcv5htq40dsm9tggg0teic02u3t9mb8v.apps.googleusercontent.com" // "PUT_YOUR_ID_HERE"
+    case googleClientID = "222290053753-pj8er3lebge3ictfb5oblmh3scrkg4pg.apps.googleusercontent.com" // "PUT_YOUR_ID_HERE"
 }

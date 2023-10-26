@@ -37,11 +37,16 @@ final class RegistrationViewModel {
             throw AuthError.validationError
         }
 
-        try await authRepository.createUser(
-            email: email,
-            password: password,
-            fullname: fullName
-        )
+        do {
+            try await authRepository.createUser(
+                email: email,
+                password: password,
+                fullname: fullName
+            )
+        } catch {
+            print(error.localizedDescription)
+        }
+
     }
 
     func signInWithGoogle(presenting: UIViewController) async {
