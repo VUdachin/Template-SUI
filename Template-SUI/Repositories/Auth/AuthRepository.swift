@@ -28,7 +28,7 @@ final class AuthRepository: NSObject {
 
 // Default methods
 extension AuthRepository {
-    func login(email: String, password: String) async throws {
+    public func login(email: String, password: String) async throws {
         do {
             try await firebaseRepository.auth.signIn(withEmail: email, password: password)
             authSuccess()
@@ -37,7 +37,7 @@ extension AuthRepository {
         }
     }
 
-    func createUser(email: String, password: String, fullname: String) async throws {
+    public func createUser(email: String, password: String, fullname: String) async throws {
         do {
             try await firebaseRepository.auth.createUser(withEmail: email, password: password)
             authSuccess()
@@ -46,7 +46,7 @@ extension AuthRepository {
         }
     }
 
-    func resetPassword(email: String) async throws {
+    public func resetPassword(email: String) async throws {
         do {
             try await firebaseRepository.auth.sendPasswordReset(withEmail: email)
         } catch {
@@ -54,7 +54,7 @@ extension AuthRepository {
         }
     }
 
-    func logout() async throws {
+    public func logout() async throws {
         do {
             try firebaseRepository.auth.signOut()
             UserDefaults.standard.set(false, forKey: StorageKey.isSignedIn.rawValue)
@@ -68,11 +68,11 @@ extension AuthRepository {
 
 // Google Sign In
 extension AuthRepository {
-    func signInWithGoogle(presenting: UIViewController) async throws {
-        let configuration = GIDConfiguration(clientID: AuthServiceCredentials.googleClientID.rawValue)
-
-        GIDSignIn.sharedInstance.configuration = configuration
+    public func signInWithGoogle(presenting: UIViewController) async throws {
         do {
+            guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+            GIDSignIn.sharedInstance.configuration = GIDConfiguration(clientID: clientID)
+
             let result = try await GIDSignIn.sharedInstance.signIn(withPresenting: presenting)
             guard let idToken = result.user.idToken?.tokenString else { return }
 
@@ -84,14 +84,14 @@ extension AuthRepository {
         }
     }
 
-    func logoutGoogle() {
+    public func logoutGoogle() {
         GIDSignIn.sharedInstance.signOut()
     }
 }
 
 // Apple Sign In
 extension AuthRepository: ASAuthorizationControllerDelegate {
-    func performAppleSignIn() {
+    public func performAppleSignIn() {
         do {
             let nonce = try CryptoUtils.randomNonceString()
             currentNonce = nonce

@@ -25,8 +25,8 @@ struct ProfileView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.horizontal, 16)
 
-                        NavigationLink(destination: {
-                            LoginView()
+                        Button(action: {
+                            viewModel.signInTap()
                         }, label: {
                             Text("Sign In")
                                 .frame(height: 50)
@@ -37,8 +37,8 @@ struct ProfileView: View {
                         })
                         .padding(.horizontal, 16)
 
-                        NavigationLink(destination: {
-                            RegistrationView()
+                        Button(action: {
+                            viewModel.signUpTap()
                         }, label: {
                             Text("Sign Up")
                                 .frame(height: 50)
@@ -69,22 +69,22 @@ struct ProfileView: View {
 
                 List {
                     if viewModel.userRepository.currentUser != nil {
-                        NavigationLink(destination: {
-                            ProfileEditView()
+                        Button(action: {
+                            viewModel.profileEditTap()
                         }, label: {
                             Text("Edit profile")
                         })
                     }
 
                     Button(action: {
-                        viewModel.privacyPolicyTapped()
+                        viewModel.privacyPolicyTap()
                     }, label: {
                         Text("Privacy policy")
                     })
 
                     if viewModel.userRepository.currentUser != nil {
                         Button(action: {
-                            Task { try await viewModel.logOutTapped() }
+                            Task { try await viewModel.logOutTap() }
                         }, label: {
                             Text("Logout")
                                 .foregroundStyle(Color.red)
@@ -95,6 +95,30 @@ struct ProfileView: View {
                 .scrollDisabled(true)
             }
             .navigationTitle("Profile")
+            .sheet(item: $viewModel.navigationDestinationModal) { route in
+                switch route {
+                case .profileEdit:
+                    ProfileEditView()
+                case .signIn:
+                    LoginView(viewModel: LoginViewModel(isModal: true))
+                case .signUp:
+                    RegistrationView()
+                case .privacyPolicy:
+                    Text("No screen")
+                }
+            }
+            .navigationDestination(item: $viewModel.navigationDestination) { route in
+                switch route {
+                case .profileEdit:
+                    ProfileEditView()
+                case .signIn:
+                    LoginView()
+                case .signUp:
+                    RegistrationView()
+                case .privacyPolicy:
+                    Text("No screen")
+                }
+            }
         }
     }
 }

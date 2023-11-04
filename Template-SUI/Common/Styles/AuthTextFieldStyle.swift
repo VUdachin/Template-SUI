@@ -17,6 +17,5 @@ struct AuthTextFieldStyle: TextFieldStyle {
             .padding(.horizontal, 12)
             .background(Color(.systemGray6))
             .cornerRadius(10)
-//            .padding(.horizontal, 16)
     }
 }

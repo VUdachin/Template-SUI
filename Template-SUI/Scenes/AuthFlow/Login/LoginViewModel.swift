@@ -8,14 +8,23 @@
 import Foundation
 import SwiftUI
 
+enum LoginNavigationDestination: String, Hashable, Identifiable {
+    var id: String { self.rawValue }
+
+    case signUp
+    case forgotPassword
+}
+
 @Observable
 final class LoginViewModel {
     private let authRepository: AuthRepository
     private let validationHelper: ValidationHelper
+    private let isModal: Bool
 
-    init() {
+    init(isModal: Bool = false) {
         self.authRepository = AuthRepository.shared
         self.validationHelper = ValidationHelper()
+        self.isModal = isModal
     }
 
     var email: String = ""
@@ -24,6 +33,9 @@ final class LoginViewModel {
 
     var isEmailValid: Bool = true
     var isPasswodValid: Bool = true
+
+    var navigationDestination: LoginNavigationDestination?
+    var navigationDestinationModal: LoginNavigationDestination?
 
     func login() async throws {
         checkEmailValidity()
@@ -46,6 +58,14 @@ final class LoginViewModel {
         } catch {
             print(error.localizedDescription)
         }
+    }
+
+    func signUpTap() {
+        isModal ? (navigationDestinationModal = .signUp) : (navigationDestination = .signUp)
+    }
+
+    func forgotPasswordTap() {
+        isModal ? (navigationDestinationModal = .forgotPassword) : (navigationDestination = .forgotPassword)
     }
 
     func signInWithApple() {

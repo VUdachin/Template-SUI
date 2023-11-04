@@ -9,89 +9,121 @@ import SwiftUI
 
 struct LoginView: View {
     @State var viewModel = LoginViewModel()
+    @Environment(\.dismiss) var dismiss
 
     var body: some View {
         NavigationStack {
-            Text("Login")
-                .font(.title)
-                .fontWeight(.bold)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.vertical, 4)
-                .padding(.horizontal, 16)
+            VStack {
+                Text("Login")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.vertical, 4)
+                    .padding(.horizontal, 16)
 
-            Group {
-                TextField("Enter your email", text: $viewModel.email) { _ in
-                    if !viewModel.isEmailValid {
-                        viewModel.checkEmailValidity()
+                Group {
+                    TextField("Enter your email", text: $viewModel.email) { _ in
+                        if !viewModel.isEmailValid {
+                            viewModel.checkEmailValidity()
+                        }
                     }
-                }
-                .textContentType(.emailAddress)
+                    .textContentType(.emailAddress)
 
-                VStack {
-                    if viewModel.isPasswordSecured {
-                        SecureField("Enter your password", text: $viewModel.password)
-                        // тут тоже проверка
-                    } else {
-                        TextField("Enter your password", text: $viewModel.password) { _ in
-                            if !viewModel.isPasswodValid {
-                                viewModel.checkPasswordValidity()
+                    VStack {
+                        if viewModel.isPasswordSecured {
+                            SecureField("Enter your password", text: $viewModel.password)
+                            // тут тоже проверка
+                        } else {
+                            TextField("Enter your password", text: $viewModel.password) { _ in
+                                if !viewModel.isPasswodValid {
+                                    viewModel.checkPasswordValidity()
+                                }
                             }
                         }
                     }
+                    .textContentType(.password)
+                    .overlay(
+                        Button(action: {
+                            viewModel.toggleSecure()
+                        }, label: {
+                            Image(systemName: viewModel.isPasswordSecured ? "eye.fill" : "eye.slash.fill")
+                                .foregroundStyle(.black)
+                        })
+                        .padding(.horizontal, 28),
+                        alignment: .trailing
+                    )
                 }
-                .textContentType(.password)
-                .overlay(
-                    Button(action: {
-                        viewModel.toggleSecure()
-                    }, label: {
-                        Image(systemName: viewModel.isPasswordSecured ? "eye.fill" : "eye.slash.fill")
-                            .foregroundStyle(.black)
-                    })
-                    .padding(.horizontal, 28),
-                    alignment: .trailing
-                )
+                .padding(.horizontal, 16)
+                .textFieldStyle(AuthTextFieldStyle())
+
+                Button(action: {
+                    viewModel.forgotPasswordTap()
+                }, label: {
+                    Text("Forgot Password?")
+                        .font(.subheadline.bold())
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                        .padding(.vertical, 8)
+                        .padding(.trailing, 16)
+                })
+
+                Button(action: {
+                    Task {
+                        try await viewModel.login()
+                        dismiss()
+                    }
+                }, label: {
+                    Text("Sign In")
+                        .font(.headline)
+                        .frame(height: 50)
+                        .frame(maxWidth: .infinity)
+                        .foregroundColor(Color.black)
+                        .background(Color.gray)
+                        .cornerRadius(10)
+                        .padding(.horizontal)
+                })
+
+                _serviceDividerView
+
+                AuthServicesView { actionType in
+                    switch actionType {
+                    case .apple:
+                        viewModel.signInWithApple()
+                    case .google:
+                        Task {
+                            await viewModel.signInWithGoogle(presenting: getRootViewController())
+                            dismiss()
+                        }
+                    case .emailPassword: break
+                    }
+                }
+
+                _authSelectionView
             }
-            .padding(.horizontal, 16)
-            .textFieldStyle(AuthTextFieldStyle())
-
-            NavigationLink(destination: {
-                ResetPasswordView(
-                    viewModel: ResetPasswordViewModel(email: viewModel.email)
-                )
-            }, label: {
-                Text("Forgot Password?")
-                    .font(.subheadline.bold())
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-                    .padding(.vertical, 8)
-                    .padding(.trailing, 16)
-            })
-
-            Button(action: {
-                Task { viewModel.login }
-            }, label: {
-                Text("Sign In")
-                    .font(.headline)
-                    .frame(height: 50)
-                    .frame(maxWidth: .infinity)
-                    .foregroundColor(Color.black)
-                    .background(Color.gray)
-                    .cornerRadius(10)
-                    .padding()
-            })
-
-            _serviceDividerView
-
-            AuthServicesView { actionType in
-                switch actionType {
-                case .apple:
-                    viewModel.signInWithApple()
-                case .google:
-                    Task { await viewModel.signInWithGoogle(presenting: getRootViewController()) }
-                case .emailPassword: break
+            .sheet(item: $viewModel.navigationDestinationModal) { route in
+                switch route {
+                case .signUp:
+                    RegistrationView(
+                        viewModel: RegistrationViewModel(email: viewModel.email)
+                    )
+                case .forgotPassword:
+                    ResetPasswordView(
+                        viewModel: ResetPasswordViewModel(
+                            email: viewModel.email)
+                    )
                 }
             }
-
-            _authSelectionView
+            .navigationDestination(item: $viewModel.navigationDestination) { route in
+                switch route {
+                case .signUp:
+                    RegistrationView(
+                        viewModel: RegistrationViewModel(email: viewModel.email)
+                    )
+                case .forgotPassword:
+                    ResetPasswordView(
+                        viewModel: ResetPasswordViewModel(email: viewModel.email)
+                    )
+                }
+            }
         }
     }
 
@@ -112,8 +144,8 @@ struct LoginView: View {
         HStack {
             Text("Don't have an account?")
                 .foregroundColor(Color.gray)
-            NavigationLink(destination: {
-                RegistrationView(viewModel: RegistrationViewModel(email: viewModel.email))
+            Button(action: {
+                viewModel.signUpTap()
             }, label: {
                 Text("Sign In")
             })

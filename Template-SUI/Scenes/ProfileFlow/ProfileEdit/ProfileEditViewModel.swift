@@ -27,10 +27,6 @@ final class ProfileEditViewModel {
         self.photoURL = userRepository.currentUser?.photoURL
     }
 
-    deinit {
-        print("deinit")
-    }
-
     func removePhotoTapped() async throws {
         do {
             try await userRepository.removePhoto()

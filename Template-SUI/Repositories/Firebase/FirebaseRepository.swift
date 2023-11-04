@@ -12,13 +12,11 @@ import FirebaseStorage
 final class FirebaseRepository: NSObject {
     let auth: Auth
     let storage: Storage
-//    let firestore: Firestore
 
     static let shared = FirebaseRepository()
 
-    override init() {
+    override private init() {
         self.auth = Auth.auth()
-//        self.firestore = Firestore.firestore()
         self.storage = Storage.storage()
 
         super.init()

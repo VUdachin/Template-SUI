@@ -21,7 +21,7 @@ final class UserRepository {
         self.currentUser = firebaseRepository.auth.currentUser
     }
 
-    func changeUserData(
+    public func changeUserData(
         userName: String,
         email: String,
         photo: UIImage?
@@ -41,7 +41,7 @@ final class UserRepository {
         }
     }
 
-    func removePhoto() async throws {
+    public func removePhoto() async throws {
         do {
             let changeRequest = firebaseRepository.auth.currentUser?.createProfileChangeRequest()
             changeRequest?.photoURL = nil
@@ -51,7 +51,7 @@ final class UserRepository {
         }
     }
 
-    func deleteUser() async throws {
+    public func deleteUser() async throws {
         do {
             let user = firebaseRepository.auth.currentUser
             try await user?.delete()

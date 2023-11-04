@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RegistrationView: View {
     @State var viewModel = RegistrationViewModel()
+    @Environment(\.dismiss) var dismiss
 
     var body: some View {
         Text("Register")
@@ -17,6 +18,7 @@ struct RegistrationView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.vertical, 4)
             .padding(.horizontal, 16)
+
         Group {
             TextField("Enter your email", text: $viewModel.email) { _ in
                 if !viewModel.isEmailValid {
@@ -56,7 +58,10 @@ struct RegistrationView: View {
         .textFieldStyle(AuthTextFieldStyle())
 
         Button(action: {
-            Task { viewModel.createUser }
+            Task {
+                try await viewModel.createUser()
+                dismiss()
+            }
         }, label: {
             Text("Sign Up")
                 .font(.headline)
@@ -65,7 +70,7 @@ struct RegistrationView: View {
                 .foregroundColor(Color.black)
                 .background(Color.gray)
                 .cornerRadius(10)
-                .padding()
+                .padding(.horizontal)
         })
 
         _serviceDividerView
@@ -75,7 +80,10 @@ struct RegistrationView: View {
             case .apple:
                 viewModel.signInWithApple()
             case .google:
-                Task { await viewModel.signInWithGoogle(presenting: getRootViewController()) }
+                Task { 
+                    await viewModel.signInWithGoogle(presenting: getRootViewController())
+                    dismiss()
+                }
             case .emailPassword: break
             }
         }
